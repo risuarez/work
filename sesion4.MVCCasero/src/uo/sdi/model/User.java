@@ -19,6 +19,21 @@ public class User {
 	
 	private UserStatus status;
 
+	public User() {
+		super();
+	}
+
+	public User(String login, String password, String name, String surname,
+			String email) {
+		super();
+		this.login = login;
+		this.password = password;
+		this.name = name;
+		this.surname = surname;
+		this.email = email;
+		this.status = UserStatus.ACTIVE;
+	}
+
 	public String getEmail() {
 		return email;
 	}
