@@ -42,7 +42,7 @@ public class RegistrarUsuarioAction implements Accion
 							apellidos, email);
 					dao.save(newUser);
 					Log.info("Se ha registrado el usuario [%s]", login);
-					session.setAttribute("user", newUser);
+					//session.setAttribute("user", newUser); quitado
 				} else
 				{
 					session.invalidate();
@@ -60,7 +60,7 @@ public class RegistrarUsuarioAction implements Accion
 
 		} else
 		{
-			Log.info("Se ha intentado regitrar teniendo sesion iniciada como [%s]",
+			Log.info("Se ha intentado registrar un nuevo usuario teniendo sesion iniciada como [%s]",
 					((User) session.getAttribute("user")).getLogin());
 			//session.invalidate();
 			resultado = "FRACASO";
@@ -68,4 +68,8 @@ public class RegistrarUsuarioAction implements Accion
 		return resultado;
 	}
 
+	@Override
+	public String toString() {
+		return getClass().getName();
+	}
 }
