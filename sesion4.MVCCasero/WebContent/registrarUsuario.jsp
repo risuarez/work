@@ -1,4 +1,5 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
@@ -9,16 +10,11 @@
 <body>
 	<div class="col-md-4 col-md-offset-4">
 		<h1>Registrar nuevo usuario</h1>
-		<!--  <c:if test="${requestScope.error=="existingUser"}">
-    	<div class="alert alert-danger">
-        	<p>Ya existe un usuario con ese login</p>
-    	</div>
-    	</c:if>
-    	<c:if test="${requestScope.error=="differentPasswords"}">
-    	<div class="alert alert-danger">
-        	<p>Las contraseñas deben ser iguales</p>
-    	</div>
-    	</c:if>-->
+		<c:if test="${error!=null}">
+			<div class="alert alert-danger">
+				<p>${error}</p>
+			</div>
+		</c:if>
 		<form class="form-horizontal" action="registrarUsuario" method="post">
 			<div class="form-group">
 				<input class="form-control" type="text" name="login"

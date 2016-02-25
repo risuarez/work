@@ -16,7 +16,6 @@ public class RegistrarUsuarioAction implements Accion
 	public String execute(HttpServletRequest request,
 			HttpServletResponse response)
 	{
-
 		String resultado = "EXITO";
 
 		String login = request.getParameter("login");
@@ -49,12 +48,14 @@ public class RegistrarUsuarioAction implements Accion
 					Log.info(
 							"Las contraseñas del registro del usuario [%s] no son iguales",
 							login);
+					request.setAttribute("error", "Error: Las contraseñas deben ser iguales");
 					resultado = "FRACASO";
 				}
 			} else
 			{
 				session.invalidate();
 				Log.info("Ya existe un usuario con login [%s]", login);
+				request.setAttribute("error", "Error: Ya se existe un usuario con ese login");
 				resultado = "FRACASO";
 			}
 

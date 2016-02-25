@@ -32,20 +32,23 @@ public class ValidarseAction implements Accion {
 				}
 				else
 				{
-					session.invalidate();
+					session.invalidate();// esto no se si es obligatorio :'(
 					Log.info("Contraseña del usuario [%s] incorrecta",nombreUsuario);
+					request.setAttribute("error", "Contraseña y/o usuario incorrecto");
 					resultado="FRACASO";
 				}
 			}
 			else {
 				session.invalidate();
 				Log.info("El usuario [%s] no está registrado",nombreUsuario);
+				request.setAttribute("error", "Contraseña y/o usuario incorrecto");
 				resultado="FRACASO";
 			}
 		}
 		else
 			if (!nombreUsuario.equals(session.getAttribute("user"))) {
 				Log.info("Se ha intentado iniciar sesión como [%s] teniendo la sesión iniciada como [%s]",nombreUsuario,((User)session.getAttribute("user")).getLogin());
+				request.setAttribute("error", "Ha intentado iniciar una nueva sesión con una sesión ya abierta");
 				session.invalidate();
 				resultado="FRACASO";
 			}

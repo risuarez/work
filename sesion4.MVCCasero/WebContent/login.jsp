@@ -10,11 +10,11 @@
 <body>
 	<div class="col-md-4 col-md-offset-4">
 		<h1>Inicie sesión</h1>
-		<!--  <c:if test="${requestScope.jspSiguiente==null}">
-    	<div class="alert alert-danger">
-        	<p>Usuario y/o contraseña incorrecto</p>
-    	</div>
-    </c:if>-->
+		<c:if test="${error!=null}">
+			<div class="alert alert-danger">
+				<p>${error}</p>
+			</div>
+		</c:if>
 		<form class="form-horizontal" action="validarse" method="post">
 			<div class="form-group">
 				<input class="form-control" type="text" name="nombreUsuario"
@@ -28,12 +28,37 @@
 			<div class="form-group">
 				<label class="col-md-4 control-label" for="btRegistrarse"></label>
 				<div class="col-md-8">
-					<a id="registrarUsuario" href="registrarUsuario.jsp" class="btn btn-info" role="button">Registrar usuario</a>
-					<input type="submit" class="btn btn-success" value="Iniciar sesión">
+					<a id="listarViajes" href="listarViajes" class="btn btn-warning"
+						role="button">Lista de viajes</a> 
+					<a id="registrarUsuario"
+						href="registrarUsuario.jsp" class="btn btn-info" role="button">Registrar
+						usuario</a> 
+					<input type="submit" class="btn btn-success"
+						value="Iniciar sesión">
+
 				</div>
 			</div>
 		</form>
 	</div>
-	<a id="listarViajes" href="listarViajes" class="btn btn-warning" role="button">Lista de viajes</a>
+	<c:if test="${listaViajes!=null}">
+		<div class="col-md-4 col-md-offset-4">
+		<h1>Próximos viajes</h1>
+				<c:forEach var="entry" items="${listaViajes}" varStatus="i">
+					<div class="panel panel-info">
+						<div class="panel-heading"> ${entry.departure.city} -> ${entry.destination.city}</div>
+						<div class="panel-body">
+						<ul>
+							<li>Id viaje: <a href="mostrarViaje?id=${entry.id}">${entry.id}</a></li>
+							<li>Origen: ${entry.departure.city}</li>
+							<li>Destino: ${entry.destination.city}</li>
+							<li>Plazas libres: ${entry.availablePax}</li>
+						</ul>
+						</div>
+					</div>
+				</c:forEach>
+			</table>
+		</div>
+	</c:if>
+
 </body>
 </html>
