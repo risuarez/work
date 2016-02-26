@@ -1,40 +1,54 @@
-<%@ page contentType="text/html" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html><head> <title>ShareMyTrip - Registrar usuario</title>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<head>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+<title>ShareMyTrip - Registrar usuario</title>
 <body>
-  <form action="registrarUsuario" method="post">
+	<div class="col-md-4 col-md-offset-4">
+		<h1>Registrar nuevo usuario</h1>
+		<c:if test="${error!=null}">
+			<div class="alert alert-danger">
+				<p>${error}</p>
+			</div>
+		</c:if>
+		<form class="form-horizontal" action="registrarUsuario" method="post">
+			<div class="form-group">
+				<input class="form-control" type="text" name="login"
+					placeholder="Usuario" />
+			</div>
+			<div class="form-group">
+				<input class="form-control" type="text" name="nombre"
+					placeholder="Nombre" />
+			</div>
+			<div class="form-group">
+				<input class="form-control" type="text" name="apellidos"
+					placeholder="Apellidos" />
+			</div>
+			<div class="form-group">
+				<input class="form-control" type="text" name="email"
+					placeholder="Email" />
+			</div>
+			<div class="form-group">
+				<input class="form-control" type="password" name="password1"
+					placeholder="Contraseña" />
+			</div>
+			<div class="form-group">
+				<input class="form-control" type="password" name="password2"
+					placeholder="Repita la contraseña" />
+			</div>
 
- 	<center><h1>Registrar nuevo usuario</h1></center>
- 	<hr><br>
- 	<table align="center">
-    	<tr> 
-    		<td align="right">Identificador de usuario</td>
-	    	<td><input type="text" name="login" align="left" size="15"></td>
-      	</tr>
-    	<tr> 
-    		<td align="right">Nombre</td>
-	    	<td><input type="text" name="nombre" align="left" size="15"></td>
-      	</tr>
-    	<tr> 
-    		<td align="right">Apellidos</td>
-	    	<td><input type="text" name="apellidos" align="left" size="15"></td>
-      	</tr>
-    	<tr> 
-    		<td align="right">Email</td>
-	    	<td><input type="text" name="email" align="left" size="15"></td>
-      	</tr>
-    	<tr> 
-    		<td align="right">Contraseña</td>
-	    	<td><input type="text" name="password1" align="left" size="15"></td>
-      	</tr>
-    	<tr> 
-    		<td align="right">Repita contraseña</td>
-	    	<td><input type="text" name="password2" align="left" size="15"></td>
-      	</tr>
-      	<tr>
-    	    <td><input type="submit" value="Enviar"/></td>
-      	</tr>
-      </table>
-   </form>
+			<div class="form-group">
+				<label class="col-md-4 control-label" for="btRegistrarse"></label>
+				<div class="col-md-8">
+					<a href="login.jsp" class="btn btn-danger" role="button">Cancelar</a>
+					<input type="submit" class="btn btn-success" value="Registrar">
+				</div>
+			</div>
+		</form>
+	</div>
 </body>
 </html>

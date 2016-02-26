@@ -7,21 +7,6 @@
 <title>ShareMyTrip - Listado de viajes</title>
 </head>
 <body>
-	<table border="1" align="center">
-			<tr>
-				<th>ID viaje</th>
-				<th>Origen</th>
-				<th>Destino</th>
-				<th>Plazas libres</th>
-			</tr>
-		<c:forEach var="entry" items="${listaViajes}" varStatus="i">
-			<tr id="item_${i.index}">
-				<td><a href="mostrarViaje?id=${entry.id}">${entry.id}</a></td>
-				<td>${entry.departure.city}</td>
-				<td>${entry.destination.city}</td>
-				<td>${entry.availablePax}</td>
-			</tr>
-		</c:forEach>
-	</table>
+	
 </body>
 </html>

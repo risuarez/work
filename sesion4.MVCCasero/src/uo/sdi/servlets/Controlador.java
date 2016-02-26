@@ -120,8 +120,12 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 		resJSP.put("FRACASO","/login.jsp");
 		opcionResJSP.put("validarse", resJSP);
 		resJSP=new HashMap<String, String>();
-		resJSP.put("EXITO","/listaViajes.jsp");
+		resJSP.put("EXITO","/login.jsp");
 		opcionResJSP.put("listarViajes", resJSP);
+		resJSP=new HashMap<String, String>();
+		resJSP.put("EXITO","/login.jsp");
+		resJSP.put("FRACASO","/registrarUsuario.jsp");
+		opcionResJSP.put("registrarUsuario", resJSP);
 		
 		mapaDeNavegacion.put("PUBLICO",opcionResJSP);
 		
