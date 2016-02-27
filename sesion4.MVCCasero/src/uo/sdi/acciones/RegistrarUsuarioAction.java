@@ -27,50 +27,67 @@ public class RegistrarUsuarioAction implements Accion
 
 		HttpSession session = request.getSession();
 
-		if (session.getAttribute("user") == null)
+		if (login.isEmpty() || nombre.isEmpty()
+				|| apellidos.isEmpty() || email.isEmpty()
+				|| password1.isEmpty() || password2.isEmpty())
 		{
-
-			UserDao dao = PersistenceFactory.newUserDao();
-			User userWithSameLogin = dao.findByLogin(login);
-
-			if (userWithSameLogin == null)// comprobar que el usuario no exista
+			Log.info("Campo/s vacio al intentar registrar usuario ");
+			request.setAttribute("error", "Debe rellenar todos los campos");
+			resultado = "FRACASO";
+		} else
+		{
+			if (session.getAttribute("user") == null)
 			{
-				if (password1.equals(password2)) // comprobar que las contraseñas sean iguales
+
+				UserDao dao = PersistenceFactory.newUserDao();
+				User userWithSameLogin = dao.findByLogin(login);
+
+				if (userWithSameLogin == null)// comprobar que el usuario no
+												// exista
 				{
-					User newUser = new User(login, password1, nombre,
-							apellidos, email);
-					dao.save(newUser);
-					Log.info("Se ha registrado el usuario [%s]", login);
-					//session.setAttribute("user", newUser); quitado
+					if (password1.equals(password2)) // comprobar que las
+														// contraseñas sean
+														// iguales
+					{
+						User newUser = new User(login, password1, nombre,
+								apellidos, email);
+						dao.save(newUser);
+						Log.info("Se ha registrado el usuario [%s]", login);
+						// session.setAttribute("user", newUser); quitado
+					} else
+					{
+						session.invalidate();
+						Log.info(
+								"Las contraseñas del registro del usuario [%s] no son iguales",
+								login);
+						request.setAttribute("error",
+								"Error: Las contraseñas deben ser iguales");
+						resultado = "FRACASO";
+					}
 				} else
 				{
 					session.invalidate();
-					Log.info(
-							"Las contraseñas del registro del usuario [%s] no son iguales",
-							login);
-					request.setAttribute("error", "Error: Las contraseñas deben ser iguales");
+					Log.info("Ya existe un usuario con login [%s]", login);
+					request.setAttribute("error",
+							"Error: Ya se existe un usuario con ese login");
 					resultado = "FRACASO";
 				}
+
 			} else
 			{
-				session.invalidate();
-				Log.info("Ya existe un usuario con login [%s]", login);
-				request.setAttribute("error", "Error: Ya se existe un usuario con ese login");
+				Log.info(
+						"Se ha intentado registrar un nuevo usuario teniendo sesion iniciada como [%s]",
+						((User) session.getAttribute("user")).getLogin());
+				// session.invalidate();
 				resultado = "FRACASO";
 			}
-
-		} else
-		{
-			Log.info("Se ha intentado registrar un nuevo usuario teniendo sesion iniciada como [%s]",
-					((User) session.getAttribute("user")).getLogin());
-			//session.invalidate();
-			resultado = "FRACASO";
 		}
 		return resultado;
 	}
 
 	@Override
-	public String toString() {
+	public String toString()
+	{
 		return getClass().getName();
 	}
 }

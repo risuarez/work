@@ -26,17 +26,13 @@
 			</div>
 
 			<div class="form-group">
-				<label class="col-md-4 control-label" for="btRegistrarse"></label>
-				<div class="col-md-8">
 					<a id="listarViajes" href="listarViajes" class="btn btn-warning"
 						role="button">Lista de viajes</a> 
 					<a id="registrarUsuario"
 						href="registrarUsuario.jsp" class="btn btn-info" role="button">Registrar
 						usuario</a> 
-					<input type="submit" class="btn btn-success"
+					<input type="submit" class="btn btn-success pull-right"
 						value="Iniciar sesión">
-
-				</div>
 			</div>
 		</form>
 	</div>
@@ -48,7 +44,7 @@
 						<div class="panel-heading"> ${entry.departure.city} -> ${entry.destination.city}</div>
 						<div class="panel-body">
 						<ul>
-							<li>Id viaje: <a href="mostrarViaje?id=${entry.id}">${entry.id}</a></li>
+							<li>Id viaje: ${entry.id}</li>
 							<li>Origen: ${entry.departure.city}</li>
 							<li>Destino: ${entry.destination.city}</li>
 							<li>Plazas libres: ${entry.availablePax}</li>
@@ -56,7 +52,6 @@
 						</div>
 					</div>
 				</c:forEach>
-			</table>
 		</div>
 	</c:if>
 
