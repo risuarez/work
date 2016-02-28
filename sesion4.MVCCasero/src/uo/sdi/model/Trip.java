@@ -26,6 +26,29 @@ public class Trip {
 	private TripStatus status;
 	
 	private Long promoterId;
+	
+	public Trip(){
+		super();
+	}
+
+	public Trip(AddressPoint departure, AddressPoint destination,
+			Date arrivalDate, Date departureDate, Date closingDate,
+			Integer availablePax, Integer maxPax, Double estimatedCost,
+			String comments, TripStatus status, Long promoterId)
+	{
+		super();
+		this.departure = departure;
+		this.destination = destination;
+		this.arrivalDate = arrivalDate;
+		this.departureDate = departureDate;
+		this.closingDate = closingDate;
+		this.availablePax = availablePax;
+		this.maxPax = maxPax;
+		this.estimatedCost = estimatedCost;
+		this.comments = comments;
+		this.status = status;
+		this.promoterId = promoterId;
+	}
 
 	public AddressPoint getDeparture() {
 		return departure;

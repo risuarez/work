@@ -55,6 +55,7 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 			Log.error("Se ha producido alguna excepción no manejada [%s]",e);
 			
 			jspSiguiente="/login.jsp";
+//			throw e;
 		}
 			
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(jspSiguiente); 
@@ -107,6 +108,7 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 		mapaRegistrado.put("modificarPassword", new ModificarPasswordAction());
 		mapaRegistrado.put("cerrarSesion", new CerrarSesionAction());
 		mapaRegistrado.put("listarViajes", new ListarViajesAction());
+		mapaRegistrado.put("registrarViaje", new RegistrarViajeAction());
 		mapaDeAcciones.put("REGISTRADO", mapaRegistrado);
 	}
 	
@@ -153,6 +155,10 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 		resJSP=new HashMap<String, String>();
 		resJSP.put("EXITO","/login.jsp");
 		opcionResJSP.put("cerrarSesion", resJSP);
+		resJSP=new HashMap<String, String>();
+		resJSP.put("EXITO","/registrarViaje.jsp");
+		resJSP.put("FRACASO","/registrarViaje.jsp");
+		opcionResJSP.put("registrarViaje", resJSP);
 		
 		mapaDeNavegacion.put("REGISTRADO",opcionResJSP);
 	}

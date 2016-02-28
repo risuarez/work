@@ -71,8 +71,8 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<div class="col-md-8">
-					<input type="submit" class="btn btn-success"
+				<div class="col-md-10">
+					<input type="submit" class="btn btn-success pull-right"
 						value="Modificar datos">
 
 				</div>
@@ -115,8 +115,8 @@
 					</div>
 			</div>
 			<div class="form-group">
-				<div class="col-md-8">
-					<input type="submit" class="btn btn-success"
+				<div class="col-md-10">
+					<input type="submit" class="btn btn-success pull-right"
 						value="Modificar contraseña">
 
 				</div>

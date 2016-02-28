@@ -30,6 +30,18 @@
 	<form class="form-horizontal" action="registrarViaje" method="post">
 		<div class="col-md-4 col-md-offset-4">
 			<h1>Registrar viaje</h1>
+
+			<c:if test="${correctRegistrarViaje!=null}">
+				<div class="alert alert-success">
+					<p>${correctRegistrarViaje}</p>
+				</div>
+			</c:if>
+			<c:if test="${wrongRegistrarViaje!=null}">
+				<div class="alert alert-danger">
+					<p>${wrongRegistrarViaje}</p>
+				</div>
+			</c:if>
+			
 			<div class="col-md-5">
 				<h2>Origen</h2>
 				<div class="form-group">
@@ -137,20 +149,22 @@
 				<label class="col-md-5 control-label" for="textinput">Coste
 					estimado: </label>
 				<div class="col-md-5">
-					<input class="form-control" type="text" name="fechaLimite"
+					<input class="form-control" type="text" name="coste"
 						placeholder="Coste (€)" />
 				</div>
 			</div>
 
 			<div class="form-group">
-				<label class="col-md-5 control-label" for="textinput">Descripcion: </label>
+				<label class="col-md-5 control-label" for="textinput">Descripcion:
+				</label>
 				<div class="col-md-5">
 					<input class="form-control" type="textArea" name="descripcion"
 						placeholder="Descripcion/comentarios" />
 				</div>
 			</div>
 			<div class="form-group">
-					<input type="submit" class="btn btn-success pull-right" value="Registrar">
+				<input type="submit" class="btn btn-success pull-right"
+					value="Registrar">
 			</div>
 		</div>
 	</form>

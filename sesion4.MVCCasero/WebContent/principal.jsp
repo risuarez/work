@@ -21,7 +21,7 @@
 			<li><a href="registrarViaje.jsp">Registrar viaje</a></li>
 			<li>
 				<form class="form-horizontal" action="cerrarSesion" method="post">
-					<input type="submit" class="btn btn-danger" value="Cerrar sesion">
+					<input type="submit" class="btn btn-danger pull-right" value="Cerrar sesion">
 				</form>
 			</li>
 		</ul>

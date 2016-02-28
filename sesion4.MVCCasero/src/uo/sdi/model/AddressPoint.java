@@ -14,6 +14,22 @@ public class AddressPoint {
 	private String zipCode;
 	private Waypoint waypoint;
 	
+	public AddressPoint()
+	{
+		super();
+	}
+
+	public AddressPoint(String address, String city, String state,
+			String country, String zipCode)
+	{
+		super();
+		this.address = address;
+		this.city = city;
+		this.state = state;
+		this.country = country;
+		this.zipCode = zipCode;
+	}
+
 	public AddressPoint(String address, String city, String state, 
 			String country, String zipCode, Waypoint waypoint) {
 		
@@ -48,6 +64,11 @@ public class AddressPoint {
 
 	public Waypoint getWaypoint() {
 		return waypoint;
+	}
+
+	public void setWaypoint(Waypoint waypoint)
+	{
+		this.waypoint = waypoint;
 	}
 
 	@Override
