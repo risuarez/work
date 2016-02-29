@@ -15,7 +15,7 @@
 			<a class="navbar-brand" href="principal.jsp">ShareMyTrip</a>
 		</div>
 		<ul class="nav navbar-nav">
-			<li class="active"><a href="principal.jsp">Consultar viajes</a></li>
+			<li><a href="consultarViajes">Consultar viajes</a></li>
 			<li><a href="modificarUsuario.jsp">Modificar datos usuario</a></li>
 			<li><a href="principal.jsp">Ver mis viajes</a></li>
 			<li class="active"><a href="registrarViaje">Registrar viaje</a></li>
