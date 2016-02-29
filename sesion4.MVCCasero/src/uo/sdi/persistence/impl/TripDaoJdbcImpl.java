@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 import uo.sdi.model.AddressPoint;
+import uo.sdi.model.SeatStatus;
 import uo.sdi.model.Trip;
 import uo.sdi.model.TripStatus;
 import uo.sdi.model.Waypoint;
@@ -167,6 +168,31 @@ public class TripDaoJdbcImpl implements TripDao {
 				"TRIP_FIND_BY_PROMOTER_AND_ARRIVAL", 
 				new TripMapper(),
 				id, arrivalDate);
+	}
+	
+	@Override
+	public List<Trip> findByPromoterId(Long id) {
+		return jdbcTemplate.queryForList("TRIP_FIND_BY_PROMOTER",
+				new TripMapper(), id);
+	}
+	
+	
+	@Override
+	public List<Trip> findByUserAndStatus(Long userId, SeatStatus status) {
+		return jdbcTemplate.queryForList(
+				"TRIP_FIND_BY_USER_ID_AND_STATUS", 
+				new TripMapper(), 
+				userId, status
+			);
+	}
+
+	@Override
+	public List<Trip> findByUserInterested(Long userId) {
+		return jdbcTemplate.queryForList(
+				"TRIP_FIND_BY_USER_INTERESTED", 
+				new TripMapper(), 
+				userId
+			);
 	}
 
 }
