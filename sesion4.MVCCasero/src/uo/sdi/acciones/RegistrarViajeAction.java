@@ -121,7 +121,7 @@ public class RegistrarViajeAction implements Accion
 				Log.info("Fecha de destino o de origen posterior a "
 						+ "fecha de origen o limite [%s]", usuario.getLogin());
 				resultado = "FRACASO";
-			} else if (intPlazasMaximo <= intPlazasLibres
+			} else if (intPlazasMaximo < intPlazasLibres
 					|| intPlazasMaximo <= 0 || intPlazasLibres <= 0
 					|| doubleCoste <= 0)
 			{

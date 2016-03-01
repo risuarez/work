@@ -17,7 +17,7 @@
 		<ul class="nav navbar-nav">
 			<li><a href="consultarViajes">Consultar viajes</a></li>
 			<li><a href="modificarUsuario.jsp">Modificar datos usuario</a></li>
-			<li><a href="principal.jsp">Ver mis viajes</a></li>
+			<li><a href="verMisViajes.jsp">Ver mis viajes</a></li>
 			<li class="active"><a href="registrarViaje">Registrar viaje</a></li>
 			<li>
 				<form class="form-horizontal" action="cerrarSesion" method="post">

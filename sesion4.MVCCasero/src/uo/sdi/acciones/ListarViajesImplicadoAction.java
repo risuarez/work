@@ -36,7 +36,7 @@ public class ListarViajesImplicadoAction implements Accion {
 
 			// Obteniendo viajes en los que participa el usuario
 			viajesParticipante = PersistenceFactory.newTripDao()
-					.findByUserAndStatus(usuario.getId(), SeatStatus.ACCEPTED);
+					.findByUserAndStatus(usuario.getId(), SeatStatus.ACCEPTED.ordinal());
 
 			request.setAttribute("listaViajesParticipante", viajesParticipante);
 			Log.debug("Obtenida lista de viajes en los que participa,"

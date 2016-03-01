@@ -178,7 +178,7 @@ public class TripDaoJdbcImpl implements TripDao {
 	
 	
 	@Override
-	public List<Trip> findByUserAndStatus(Long userId, SeatStatus status) {
+	public List<Trip> findByUserAndStatus(Long userId, int status) {
 		return jdbcTemplate.queryForList(
 				"TRIP_FIND_BY_USER_ID_AND_STATUS", 
 				new TripMapper(), 
@@ -192,6 +192,33 @@ public class TripDaoJdbcImpl implements TripDao {
 				"TRIP_FIND_BY_USER_INTERESTED", 
 				new TripMapper(), 
 				userId
+			);
+	}
+
+	@Override
+	public List<Trip> findByOrigen(String origen) {
+		return jdbcTemplate.queryForList(
+				"TRIP_FIND_BY_DEPARTURE", 
+				new TripMapper(), 
+				origen
+			);
+	}
+
+	@Override
+	public List<Trip> findByDestino(String destino) {
+		return jdbcTemplate.queryForList(
+				"TRIP_FIND_BY_DESTINATION", 
+				new TripMapper(), 
+				destino
+			);
+	}
+
+	@Override
+	public List<Trip> findByOrigenAndDestino(String origen, String destino) {
+		return jdbcTemplate.queryForList(
+				"TRIP_FIND_BY_DEPARTURE_AND_DESTINATION", 
+				new TripMapper(), 
+				origen, destino
 			);
 	}
 

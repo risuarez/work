@@ -1,7 +1,7 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ include file="comprobarNavegacion.jsp"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!DOCTYPE>
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
 <head>
@@ -19,7 +19,7 @@
 			<li class="active"><a href="consultarViajes">Consultar
 					viajes</a></li>
 			<li><a href="modificarUsuario.jsp">Modificar datos usuario</a></li>
-			<li><a href="principal.jsp">Ver mis viajes</a></li>
+			<li><a href="verMisViajes">Ver mis viajes</a></li>
 			<li><a href="registrarViaje.jsp">Registrar viaje</a></li>
 			<li>
 				<form class="form-horizontal" action="cerrarSesion" method="post">
@@ -30,6 +30,26 @@
 		</ul>
 	</div>
 	</nav>
+
+	
+		<form action ="">
+			<label for="origen">Origen:</label>
+			<input type="text" id="origen"name="origen" />
+			
+			<label for="destino">Destino:</label>
+			<input type="text" id="destino" name="destino" />
+			
+			<input type="submit" value="Buscar" />
+			
+			
+  			<input type="radio" name="orderBy" value="origen"> Origen<br>
+  			<input type="radio" name="orderBy" value="destino"> Destino<br>
+  			<input type="radio" name="orderBy" value="fecha"> Fecha
+
+		</form>
+
+	
+
 	<jsp:useBean id="user" class="uo.sdi.model.User" scope="session" />
 	<div class="col-md-4 col-md-offset-4">
 		<h1>Próximos viajes</h1>
