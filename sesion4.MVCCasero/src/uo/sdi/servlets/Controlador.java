@@ -188,7 +188,7 @@ public class Controlador extends javax.servlet.http.HttpServlet
 		resJSP.put("EXITO", "/consultarViajes.jsp");
 		opcionResJSP.put("consultarViajes", resJSP);
 		resJSP = new HashMap<String, String>();
-		resJSP.put("EXITO", "/verMisViajes.jsp"); // Deberia llevarte a mis viajes
+		resJSP.put("EXITO", "/principal.jsp");
 		resJSP.put("FRACASO", "/principal.jsp");
 		opcionResJSP.put("solicitarPlaza", resJSP);
 		resJSP = new HashMap<String, String>();
