@@ -14,10 +14,12 @@ public class CerrarSesionAction implements Accion {
 			HttpServletResponse response) {
 		
 		HttpSession session=request.getSession();
-
+		synchronized(session)
+		{
 		User usuario = ((User) session.getAttribute("user"));
 		session.invalidate();
 		Log.info("El usuario [%s] ha cerrado sesion",usuario.getLogin());
+		}
 				
 		return "EXITO";
 	}

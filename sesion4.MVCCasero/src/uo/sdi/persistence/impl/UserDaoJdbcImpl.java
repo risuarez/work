@@ -86,5 +86,15 @@ public class UserDaoJdbcImpl implements UserDao {
 				login
 			);
 	}
+	
+	@Override
+	public List<User> findByTrip(Long tripId)
+	{
+		return jdbcTemplate.queryForList(
+				"USER_FIND_BY_TRIP", 
+				new UserMapper(), 
+				tripId
+			);
+	}
 
 }

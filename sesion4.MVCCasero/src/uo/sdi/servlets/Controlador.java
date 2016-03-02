@@ -13,7 +13,9 @@ import javax.servlet.http.HttpSession;
 import alb.util.log.Log;
 import uo.sdi.acciones.*;
 
-public class Controlador extends javax.servlet.http.HttpServlet {
+
+public class Controlador extends javax.servlet.http.HttpServlet
+{
 
 	private static final long serialVersionUID = 1L;
 	private Map<String, Map<String, Accion>> mapaDeAcciones; // <rol, <opcion,
@@ -24,19 +26,23 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 																			// <resultado,
 																			// JSP>>>
 
-	public void init() throws ServletException {
+	public void init() throws ServletException
+	{
 		crearMapaAcciones();
 		crearMapaDeJSP();
 	}
 
 	public void doGet(HttpServletRequest req, HttpServletResponse res)
-			throws IOException, ServletException {
+			throws IOException, ServletException
+	{
 
 		String opcion, resultado, jspSiguiente;
 		Accion accion;
 		String rolAntes, rolDespues;
 
-		try {
+
+		try
+		{
 			opcion = req.getServletPath().replace("/", "");
 
 			rolAntes = obtenerRolDeSesion(req);
@@ -51,7 +57,9 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 
 			req.setAttribute("jspSiguiente", jspSiguiente);
 
-		} catch (Exception e) {
+
+		} catch (Exception e)
+		{
 
 			req.getSession().invalidate();
 
@@ -67,7 +75,8 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 		dispatcher.forward(req, res);
 	}
 
-	private String obtenerRolDeSesion(HttpServletRequest req) {
+	private String obtenerRolDeSesion(HttpServletRequest req)
+	{
 		HttpSession sesion = req.getSession();
 		if (sesion.getAttribute("user") == null)
 			return "PUBLICO";
@@ -77,7 +86,8 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 
 	// Obtiene un objeto accion en funci�n de la opci�n
 	// enviada desde el navegador
-	private Accion buscarAccionParaOpcion(String rol, String opcion) {
+	private Accion buscarAccionParaOpcion(String rol, String opcion)
+	{
 
 		Accion accion = mapaDeAcciones.get(rol).get(opcion);
 		Log.debug("Elegida acción [%s] para opción [%s] y rol [%s]", accion,
@@ -88,7 +98,8 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 	// Obtiene la p�gina JSP a la que habr� que entregar el
 	// control el funci�n de la opci�n enviada desde el navegador
 	// y el resultado de la ejecuci�n de la acci�n asociada
-	private String buscarJSPSegun(String rol, String opcion, String resultado) {
+	private String buscarJSPSegun(String rol, String opcion, String resultado)
+	{
 
 		String jspSiguiente = mapaDeNavegacion.get(rol).get(opcion)
 				.get(resultado);
@@ -98,7 +109,8 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 		return jspSiguiente;
 	}
 
-	private void crearMapaAcciones() {
+	private void crearMapaAcciones()
+	{
 
 		mapaDeAcciones = new HashMap<String, Map<String, Accion>>();
 
@@ -112,14 +124,17 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 		mapaRegistrado.put("modificarDatos", new ModificarDatosAction());
 		mapaRegistrado.put("modificarPassword", new ModificarPasswordAction());
 		mapaRegistrado.put("cerrarSesion", new CerrarSesionAction());
-		mapaRegistrado.put("consultarViajes", new ListarViajesAction());
+		mapaRegistrado.put("consultarViajes",
+				new ConsultarRegistradoViajesAction());
 		mapaRegistrado.put("registrarViaje", new RegistrarViajeAction());
 		mapaRegistrado.put("verMisViajes", new ListarViajesImplicadoAction());
+		mapaRegistrado.put("solicitarPlaza", new SolicitarPlazaAction());
+		mapaRegistrado.put("verPerfilUsuario", new MostrarPerfilAction());
 		mapaDeAcciones.put("REGISTRADO", mapaRegistrado);
 	}
 
-	private void crearMapaDeJSP() {
-
+	private void crearMapaDeJSP()
+	{
 		mapaDeNavegacion = new HashMap<String, Map<String, Map<String, String>>>();
 
 		// Crear mapas auxiliares vacíos
@@ -129,15 +144,14 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 		// Mapa de navegación del público
 		resJSP.put("FRACASO", "/login.jsp");
 		opcionResJSP.put("validarse", resJSP);
-
 		resJSP = new HashMap<String, String>();
 		resJSP.put("EXITO", "/login.jsp");
 		opcionResJSP.put("listarViajes", resJSP);
-
 		resJSP = new HashMap<String, String>();
 		resJSP.put("EXITO", "/login.jsp");
 		resJSP.put("FRACASO", "/registrarUsuario.jsp");
 		opcionResJSP.put("registrarUsuario", resJSP);
+
 
 		resJSP = new HashMap<String, String>();
 		resJSP.put("EXITO", "/login.jsp");
@@ -152,39 +166,41 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 		// Mapa de navegación de usuarios registrados
 		resJSP.put("EXITO", "/principal.jsp");
 		opcionResJSP.put("validarse", resJSP);
-
 		resJSP = new HashMap<String, String>();
 		resJSP.put("EXITO", "/modificarUsuario.jsp");
 		resJSP.put("FRACASO", "/modificarUsuario.jsp");
 		opcionResJSP.put("modificarDatos", resJSP);
-
 		resJSP = new HashMap<String, String>();
 		resJSP.put("EXITO", "/modificarUsuario.jsp");
 		resJSP.put("FRACASO", "/modificarUsuario.jsp");
 		opcionResJSP.put("modificarPassword", resJSP);
-
 		resJSP = new HashMap<String, String>();
 		resJSP.put("EXITO", "/login.jsp");
 		opcionResJSP.put("cerrarSesion", resJSP);
-
 		resJSP = new HashMap<String, String>();
 		resJSP.put("EXITO", "/registrarViaje.jsp");
 		resJSP.put("FRACASO", "/registrarViaje.jsp");
 		opcionResJSP.put("registrarViaje", resJSP);
-
-		resJSP = new HashMap<String, String>();
-		resJSP.put("EXITO", "/consultarViajes.jsp");
-		opcionResJSP.put("consultarViajes", resJSP);
-
 		resJSP = new HashMap<String, String>();
 		resJSP.put("EXITO", "/verMisViajes.jsp");
 		opcionResJSP.put("verMisViajes", resJSP);
+		resJSP = new HashMap<String, String>();
+		resJSP.put("EXITO", "/consultarViajes.jsp");
+		opcionResJSP.put("consultarViajes", resJSP);
+		resJSP = new HashMap<String, String>();
+		resJSP.put("EXITO", "/verMisViajes.jsp"); // Deberia llevarte a mis viajes
+		resJSP.put("FRACASO", "/principal.jsp");
+		opcionResJSP.put("solicitarPlaza", resJSP);
+		resJSP = new HashMap<String, String>();
+		resJSP.put("EXITO", "/verPerfilUsuario.jsp");
+		opcionResJSP.put("verPerfilUsuario", resJSP);
 
 		mapaDeNavegacion.put("REGISTRADO", opcionResJSP);
 	}
 
 	public void doPost(HttpServletRequest req, HttpServletResponse res)
-			throws IOException, ServletException {
+			throws IOException, ServletException
+	{
 
 		doGet(req, res);
 	}

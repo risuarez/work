@@ -6,6 +6,7 @@ import java.util.List;
 
 import uo.sdi.model.Seat;
 import uo.sdi.model.SeatStatus;
+import uo.sdi.model.User;
 import uo.sdi.persistence.SeatDao;
 import uo.sdi.persistence.util.JdbcTemplate;
 import uo.sdi.persistence.util.RowMapper;
@@ -78,6 +79,15 @@ public class SeatDaoJdbcImpl implements SeatDao {
 				userId, tripId
 			);
 	}
+	@Override
+	public List<Seat> findByUser(Long userId) {
+		return jdbcTemplate.queryForList(
+				"SEAT_FIND_BY_USER_ID", 
+				new SeatMapper(), 
+				userId
+			);
+	}
+
 
 
 }

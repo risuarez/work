@@ -9,27 +9,9 @@
 <title>ShareMyTrip - Ver mis viajes</title>
 </head>
 <body>
-	<nav class="navbar navbar-default">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<a class="navbar-brand" href="principal.jsp">ShareMyTrip</a>
-			</div>
-			<ul class="nav navbar-nav">
-				<li><a href="consultarViajes">Consultar viajes</a></li>
-				<li><a href="modificarUsuario.jsp">Modificar datos usuario</a></li>
-				<li class="active"><a href="verMisViajes">Ver mis viajes</a></li>
-				<li><a href="registrarViaje.jsp">Registrar viaje</a></li>
-				<li>
-					<form class="form-horizontal" action="cerrarSesion" method="post">
-						<input type="submit" class="btn btn-danger pull-right"
-							value="Cerrar sesion">
-					</form>
-				</li>
-			</ul>
-		</div>
-	</nav>
+	<%@ include file="barraDeMenu.jsp"%>
 	<jsp:useBean id="user" class="uo.sdi.model.User" scope="session" />
-	<div class="col-md-4 col-md-offset-4">
+	<div class="col-md-6 col-md-offset-3">
 		<h1>Viajes ofertados por mi.</h1>
 		<c:forEach var="entry" items="${listaViajesPromotor}" varStatus="i">
 			<div class="panel panel-info">

@@ -52,6 +52,9 @@ public class RegistrarUsuarioAction implements Accion
 						User newUser = new User(login, password1, nombre,
 								apellidos, email);
 						dao.save(newUser);
+
+						request.setAttribute("correctData",
+								"Se ha registrado con exito el usuario "+login);
 						Log.info("Se ha registrado el usuario [%s]", login);
 						// session.setAttribute("user", newUser); quitado
 					} else

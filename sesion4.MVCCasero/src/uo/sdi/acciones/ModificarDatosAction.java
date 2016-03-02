@@ -29,16 +29,11 @@ public class ModificarDatosAction implements Accion
 		HttpSession session = request.getSession();
 		User usuario = ((User) session.getAttribute("user"));
 		List<String> logMessages = new ArrayList<String>();
-
-
-		//borra si existen los mensajes
-		session.removeAttribute("corrrectDataUpdate");
-		session.removeAttribute("wrongDatatUpdate");
 		
 		if (nuevoEmail.isEmpty() || nuevoNombre.isEmpty()
 				|| nuevoApellidos.isEmpty())
 		{
-			session.setAttribute("wrongDatatUpdate",
+			request.setAttribute("wrongDatatUpdate",
 					"Debe rellenar los 3 campos");
 			Log.debug(
 					"El usuario [%s] no ha rellando los 3 campos al actualizar datos",
@@ -69,7 +64,7 @@ public class ModificarDatosAction implements Accion
 				dao.update(usuario);
 				for (String message : logMessages)
 					Log.debug(message);
-				session.setAttribute("corrrectDataUpdate",
+				request.setAttribute("corrrectDataUpdate",
 						"Datos actualizados con éxito");
 				result = "EXITO";
 			} catch (Exception e)
@@ -77,7 +72,7 @@ public class ModificarDatosAction implements Accion
 				Log.error(
 						"Algo ha ocurrido actualizando la información de [%s]",
 						usuario.getLogin());
-				session.setAttribute("wrongDatatUpdate",
+				request.setAttribute("wrongDatatUpdate",
 						"Error actualizando los datos");
 			}
 		}

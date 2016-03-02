@@ -1,6 +1,6 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
 <head>
@@ -10,6 +10,11 @@
 <body>
 	<div class="col-md-4 col-md-offset-4">
 		<h1>Inicie sesión</h1>
+		<c:if test="${correctData!=null}">
+			<div class="alert alert-success">
+				<p>${correctData}</p>
+			</div>
+		</c:if>
 		<c:if test="${error!=null}">
 			<div class="alert alert-danger">
 				<p>${error}</p>
@@ -27,9 +32,9 @@
 
 			<div class="form-group">
 					<a id="listarViajes" href="listarViajes" class="btn btn-warning"
-						role="button">Lista de viajes</a> 
+						>Lista de viajes</a> 
 					<a id="registrarUsuario"
-						href="registrarUsuario.jsp" class="btn btn-info" role="button">Registrar
+						href="registrarUsuario.jsp" class="btn btn-info">Registrar
 						usuario</a> 
 					<input type="submit" class="btn btn-success pull-right"
 						value="Iniciar sesión">

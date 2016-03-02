@@ -24,15 +24,11 @@ public class ModificarPasswordAction implements Accion
 
 		HttpSession session = request.getSession();
 		User usuario = ((User) session.getAttribute("user"));
-		
-		//borra si existen los mensajes
-		session.removeAttribute("correctUpdatePassword");
-		session.removeAttribute("wrongUpdatePassword");
 
 		if (oldPassword.isEmpty() || newPassword1.isEmpty()
 				|| newPassword2.isEmpty())
 		{
-			session.setAttribute("wrongUpdatePassword",
+			request.setAttribute("wrongUpdatePassword",
 					"Debe rellenar los 3 campos");
 			Log.debug(
 					"El usuario [%s] no ha rellando los 3 campos al actualizar contraseña",
@@ -52,7 +48,7 @@ public class ModificarPasswordAction implements Accion
 						dao.update(usuario);
 						Log.debug("Modificada contraseña de [%s]",
 								usuario.getLogin());
-						session.setAttribute("correctUpdatePassword",
+						request.setAttribute("correctUpdatePassword",
 								"Contraseña actualizada con exito");
 						result = "EXITO";
 					} catch (Exception e)
@@ -60,17 +56,17 @@ public class ModificarPasswordAction implements Accion
 						Log.error(
 								"Algo ha ocurrido actualizando la contraseña de [%s]",
 								usuario.getLogin());
-						session.setAttribute("wrongUpdatePassword",
+						request.setAttribute("wrongUpdatePassword",
 								"Error actualizando la contraseña");
 					}
 				} else
-					session.setAttribute("wrongUpdatePassword",
+					request.setAttribute("wrongUpdatePassword",
 							"Contraseña antigua incorrecta");
 				Log.debug(
 						"El usuario [%s] ha insertado mal la contraseña al intentar actualizar",
 						usuario.getLogin());
 			} else
-				session.setAttribute("wrongUpdatePassword",
+				request.setAttribute("wrongUpdatePassword",
 						"Las nuevas contraseñas deben ser iguales");
 			Log.debug(
 					"El usuario [%s] no ha escrito dos contraseñas iguales para actualizar contraseña",

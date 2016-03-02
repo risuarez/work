@@ -1,6 +1,6 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
 <head>
@@ -44,7 +44,7 @@
 			<div class="form-group">
 				<label class="col-md-4 control-label" for="btRegistrarse"></label>
 				<div class="col-md-8">
-					<a href="login.jsp" class="btn btn-danger" role="button">Cancelar</a>
+					<a href="login.jsp" class="btn btn-danger">Cancelar</a>
 					<input type="submit" class="btn btn-success" value="Registrar">
 				</div>
 			</div>

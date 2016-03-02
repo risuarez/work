@@ -1,6 +1,6 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
 <head>
@@ -9,24 +9,7 @@
 <title>ShareMyTrip - Registrar viaje</title>
 </head>
 <body>
-	<nav class="navbar navbar-default">
-	<div class="container-fluid">
-		<div class="navbar-header">
-			<a class="navbar-brand" href="principal.jsp">ShareMyTrip</a>
-		</div>
-		<ul class="nav navbar-nav">
-			<li><a href="consultarViajes">Consultar viajes</a></li>
-			<li><a href="modificarUsuario.jsp">Modificar datos usuario</a></li>
-			<li><a href="verMisViajes.jsp">Ver mis viajes</a></li>
-			<li class="active"><a href="registrarViaje">Registrar viaje</a></li>
-			<li>
-				<form class="form-horizontal" action="cerrarSesion" method="post">
-					<input type="submit" class="btn btn-danger" value="Cerrar sesion">
-				</form>
-			</li>
-		</ul>
-	</div>
-	</nav>
+	<%@ include file="barraDeMenu.jsp"%>
 	<form class="form-horizontal" action="registrarViaje" method="post">
 		<div class="col-md-4 col-md-offset-4">
 			<h1>Registrar viaje</h1>
@@ -158,7 +141,7 @@
 				<label class="col-md-5 control-label" for="textinput">Descripcion:
 				</label>
 				<div class="col-md-5">
-					<input class="form-control" type="textArea" name="descripcion"
+					<input class="form-control" type="text" name="descripcion"
 						placeholder="Descripcion/comentarios" />
 				</div>
 			</div>

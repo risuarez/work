@@ -1,7 +1,7 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ include file="comprobarNavegacion.jsp"%>
-<!DOCTYPE>
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
 <head>
@@ -10,48 +10,9 @@
 <title>ShareMyTrip - Consultar viajes</title>
 </head>
 <body>
-	<nav class="navbar navbar-default">
-	<div class="container-fluid">
-		<div class="navbar-header">
-			<a class="navbar-brand" href="principal.jsp">ShareMyTrip</a>
-		</div>
-		<ul class="nav navbar-nav">
-			<li class="active"><a href="consultarViajes">Consultar
-					viajes</a></li>
-			<li><a href="modificarUsuario.jsp">Modificar datos usuario</a></li>
-			<li><a href="verMisViajes">Ver mis viajes</a></li>
-			<li><a href="registrarViaje.jsp">Registrar viaje</a></li>
-			<li>
-				<form class="form-horizontal" action="cerrarSesion" method="post">
-					<input type="submit" class="btn btn-danger pull-right"
-						value="Cerrar sesion">
-				</form>
-			</li>
-		</ul>
-	</div>
-	</nav>
-
-	
-		<form action ="">
-			<label for="origen">Origen:</label>
-			<input type="text" id="origen"name="origen" />
-			
-			<label for="destino">Destino:</label>
-			<input type="text" id="destino" name="destino" />
-			
-			<input type="submit" value="Buscar" />
-			
-			
-  			<input type="radio" name="orderBy" value="origen"> Origen<br>
-  			<input type="radio" name="orderBy" value="destino"> Destino<br>
-  			<input type="radio" name="orderBy" value="fecha"> Fecha
-
-		</form>
-
-	
-
+	<%@ include file="barraDeMenu.jsp"%>
 	<jsp:useBean id="user" class="uo.sdi.model.User" scope="session" />
-	<div class="col-md-4 col-md-offset-4">
+	<div class="col-md-6 col-md-offset-3">
 		<h1>Próximos viajes</h1>
 		<c:forEach var="entry" items="${listaViajes}" varStatus="i">
 			<div class="panel panel-info">
@@ -90,10 +51,23 @@
 							<li>Fecha: ${entry.arrivalDate.toLocaleString()}</li>
 						</ul>
 					</div>
+					<div class="panel panel-default">
+						<strong> Participantes</strong>
+						<div class="form-group">
+							<a id="verPromotor"
+								href="verPerfilUsuario?idUsuario=${entry.promoterId}"
+								class="btn btn-default">Promotor</a>
+							<c:forEach var="participante"
+								items="${mapParticipantes.get(entry.id)}" varStatus="i">
+								<a id="verUsuario${participante.id}"
+									href="verPerfilUsuario?idUsuario=${participante.id}"
+									class="btn btn-default">${participante.login}</a>
+							</c:forEach>
+						</div>
+					</div>
 					<c:if test="${entry.availablePax<entry.maxPax}">
 						<a id="solicitarPlaza" href="solicitarPlaza?viajeId=${entry.id}"
-							class="btn btn-success pull-right" role="button">Solicitar
-							plaza</a>
+							class="btn btn-success pull-right">Solicitar plaza</a>
 					</c:if>
 				</div>
 			</div>
