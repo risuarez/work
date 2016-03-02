@@ -48,7 +48,7 @@ public class ConsultarRegistradoViajesAction implements Accion
 						.findByTrip(t.getId()));
 			}
 			request.setAttribute("mapParticipantes", participantes);
-			Log.debug("Obtenida listas de usuarios");//
+			Log.debug("Obtenida listas de usuarios");
 
 		} catch (Exception e)
 		{

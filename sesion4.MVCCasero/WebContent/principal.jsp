@@ -9,12 +9,11 @@
 <title>ShareMyTrip - Página principal del usuario</title>
 </head>
 <body>
-
 	<%@ include file="barraDeMenu.jsp"%>
 	<jsp:useBean id="user" class="uo.sdi.model.User" scope="session" />
 	<div class="col-md-4 col-md-offset-4">
 		<div class="alert alert-info">
-			<p>
+			<p id="login">
 				Bienvenido <strong><jsp:getProperty property="login"
 						name="user" /></strong> <br />Es Vd el usuario número: ${contador}
 			</p>

@@ -11,7 +11,7 @@ import static net.sourceforge.jwebunit.junit.JWebUnit.submit;
 import org.junit.Before;
 import org.junit.Test;
 
-public class IniciarSesionConExitoTest {
+public class IniciarSesion {
 
 	@Before
 	public void prepare() {
@@ -30,5 +30,31 @@ public class IniciarSesionConExitoTest {
 		//assertTextInElement("name", "Fernando"); 
 		assertTextPresent("Es Vd el usuario número:"); 
 	}
+	
+	@Test
+	public void testIniciarSesionSinExito() {
+		// Rellenando el formulario HTML
+		beginAt("/"); // Navegar a la URL
+		setTextField("nombreUsuario", "yoNoExisto"); // Rellenar primer campo de
+														// formulario
+		submit(); // Enviar formulario
+		assertTitleEquals("ShareMyTrip - Inicie sesión"); // Comprobar título de
+															// la página
+		assertTextPresent("Debe escribir usuario y contraseña"); 
+	}
+	
+	@Test
+	public void testIniciarSesionSinExitoWrongPassword() {
+		// Rellenando el formulario HTML
+		beginAt("/"); // Navegar a la URL
+		setTextField("nombreUsuario", "user1");
+		setTextField("password", "wrongPassword");
+		
+		submit(); // Enviar formulario
+		assertTitleEquals("ShareMyTrip - Inicie sesión"); // Comprobar título de
+															// la página
+		assertTextPresent("Contraseña y/o usuario incorrecto"); 
+	}
+
 
 }

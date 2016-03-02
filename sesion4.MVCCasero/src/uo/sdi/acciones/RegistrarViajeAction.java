@@ -55,6 +55,20 @@ public class RegistrarViajeAction implements Accion
 		HttpSession session = request.getSession();
 		User usuario = ((User) session.getAttribute("user"));
 
+		if (direccionOrigen==null || ciudadOrigen==null
+				|| estadoOrigen==null || paisOrigen==null
+				|| postalOrigen==null || fechaOrigen==null
+				|| horaOrigen==null || direccionDestino==null
+				|| ciudadDestino==null || estadoDestino==null
+				|| paisDestino==null || postalDestino==null
+				|| fechaDestino==null || horaDestino==null
+				|| fechaLimite==null || plazasMaximo==null
+				|| plazasLibres==null || coste==null
+				|| descripcion==null)
+		{
+			return "FRACASO";
+		}
+		
 		if (direccionOrigen.isEmpty() || ciudadOrigen.isEmpty()
 				|| estadoOrigen.isEmpty() || paisOrigen.isEmpty()
 				|| postalOrigen.isEmpty() || fechaOrigen.isEmpty()

@@ -65,7 +65,7 @@
 							</c:forEach>
 						</div>
 					</div>
-					<c:if test="${entry.availablePax<entry.maxPax}">
+					<c:if test="${entry.availablePax<entry.maxPax && entry.promoterId!=user.id && !mapParticipantes.get(entry.id).contains(user)}">
 						<a id="solicitarPlaza" href="solicitarPlaza?viajeId=${entry.id}"
 							class="btn btn-success pull-right">Solicitar plaza</a>
 					</c:if>

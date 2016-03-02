@@ -30,6 +30,12 @@ public class ModificarDatosAction implements Accion
 		User usuario = ((User) session.getAttribute("user"));
 		List<String> logMessages = new ArrayList<String>();
 		
+		if (nuevoEmail==null || nuevoNombre==null
+				|| nuevoApellidos==null)
+		{
+			return "FRACASO";
+		}
+		
 		if (nuevoEmail.isEmpty() || nuevoNombre.isEmpty()
 				|| nuevoApellidos.isEmpty())
 		{
