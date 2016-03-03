@@ -1,6 +1,6 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE>
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
 <head>
@@ -14,6 +14,8 @@
 	<div class="col-md-6 col-md-offset-3">
 		<h1>Viajes ofertados por mi.</h1>
 		<c:forEach var="entry" items="${listaViajesPromotor}" varStatus="i">
+			
+				
 			<div class="panel panel-info">
 				<div class="panel-heading">${entry.departure.city}->
 					${entry.destination.city} (${entry.status})</div>
@@ -51,17 +53,34 @@
 						</ul>
 					</div>
 
-
-					<a id="modificarViaje" href="modificarViaje?viajeId=${entry.id}"
-						class="btn btn-success pull-right" role="button">Modificar
-						viaje</a>
-
+					<c:choose>
+					<c:when test="${entry.status.ordinal() == 0}">
+					<a id="modificarViaje" 
+					href="modificarViaje?viajeId=${entry.id}"
+						class="btn btn-success pull-center" role="button">
+						Modificar viaje</a>
+					<a id="verPasajerosInteresados" 
+					href="verPasajerosInteresados?viajeId=${entry.id}"
+						class="btn btn-info pull-left" role="button">
+						Aceptar pasajeros</a>
+					<a id="cancelarViaje" 
+					href="cancelarViaje?viajeId=${entry.id}"
+						class="btn btn-danger pull-right" role="button">
+						Cancelar viaje</a>
+					</c:when>
+					<c:otherwise>
+						<strong> Este viaje ya ha sido cancelado o
+						ya ha pasado.</strong>
+					</c:otherwise>
+					</c:choose>
+					
 
 				</div>
 			</div>
+			
 		</c:forEach>
 	</div>
-	<div class="col-md-4 col-md-offset-4">
+	<div class="col-md-6 col-md-offset-3">
 		<h1>Viajes en los que he participado.</h1>
 		<c:forEach var="entry" items="${listaViajesParticipante}"
 			varStatus="i">
@@ -110,7 +129,7 @@
 			</div>
 		</c:forEach>
 	</div>
-	<div class="col-md-4 col-md-offset-4">
+	<div class="col-md-6 col-md-offset-3">
 		<h1>Viajes que me han interesado.</h1>
 		<c:forEach var="entry" items="${listaViajesInteresado}" varStatus="i">
 			<div class="panel panel-info">
@@ -150,11 +169,18 @@
 						</ul>
 					</div>
 
-
+					<c:choose>
+					<c:when test="${entry.status.ordinal() == 3}">
 					<a id="cancelarSolicitud" href="cancelarSolicitud?viajeId=
 					${entry.id}"
 						class="btn btn-danger pull-right" role="button">
 						Cancelar solicitud</a>
+					</c:when>
+					<c:otherwise>
+						<strong> Este viaje ha sido cancelado o
+						ya ha pasado.</strong>
+					</c:otherwise>
+					</c:choose>
 
 
 				</div>

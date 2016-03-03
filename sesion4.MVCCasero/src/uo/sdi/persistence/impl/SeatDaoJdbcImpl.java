@@ -6,7 +6,6 @@ import java.util.List;
 
 import uo.sdi.model.Seat;
 import uo.sdi.model.SeatStatus;
-import uo.sdi.model.User;
 import uo.sdi.persistence.SeatDao;
 import uo.sdi.persistence.util.JdbcTemplate;
 import uo.sdi.persistence.util.RowMapper;

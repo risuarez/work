@@ -35,10 +35,24 @@ public class ConsultarRegistradoViajesAction implements Accion
 		Map<Long, List<User>> participantes = new HashMap<Long, List<User>>();
 		HttpSession session = request.getSession();
 		User usuario = ((User) session.getAttribute("user"));
+		
+		String origen = request.getParameter("origen");
+		String destino = request.getParameter("destino");
 
 		try
 		{
-			viajes = PersistenceFactory.newTripDao().findAll();
+			if (assertNotNull(origen) || assertNotNull(destino)) {
+				viajes=PersistenceFactory.newTripDao().findAll();
+			}
+			else if (!assertNotNull(origen) || assertNotNull(destino)){
+				viajes=PersistenceFactory.newTripDao().findByOrigen(origen);
+			}
+			else if (assertNotNull(origen) || !assertNotNull(destino)){
+				viajes=PersistenceFactory.newTripDao().findByDestino(destino);
+			}
+			else {
+				viajes=PersistenceFactory.newTripDao().findByOrigenAndDestino(origen, destino);
+			}
 			request.setAttribute("listaViajes", viajes);
 			Log.debug("Obtenida lista de viajes conteniendo [%d] viajes",
 					viajes.size());
@@ -57,6 +71,10 @@ public class ConsultarRegistradoViajesAction implements Accion
 //			throw e;
 		}
 		return "EXITO";
+	}
+	
+	private boolean assertNotNull(String str) {
+		return str == null || str.trim().length() == 0;
 	}
 
 	@Override

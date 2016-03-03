@@ -29,6 +29,26 @@
 				<p>${wrongResult}</p>
 			</div>
 		</c:if>
+		<c:if test="${isCancelled!=null}">
+			<div class="alert alert-success">
+				<p>${isCancelled}</p>
+			</div>
+		</c:if>
+		<c:if test="${notCancelled!=null}">
+			<div class="alert alert-danger">
+				<p>${notCancelled}</p>
+			</div>
+		</c:if>
+		<c:if test="${isAccepted!=null}">
+			<div class="alert alert-success">
+				<p>${isAccepted}</p>
+			</div>
+		</c:if>
+		<c:if test="${notAccepted!=null}">
+			<div class="alert alert-danger">
+				<p>${notAccepted}</p>
+			</div>
+		</c:if>
 	</div>
 </body>
 </html>

@@ -7,7 +7,6 @@ import java.util.Date;
 import java.util.List;
 
 import uo.sdi.model.AddressPoint;
-import uo.sdi.model.SeatStatus;
 import uo.sdi.model.Trip;
 import uo.sdi.model.TripStatus;
 import uo.sdi.model.Waypoint;
