@@ -82,7 +82,7 @@ public class ModificarViajeAction implements Accion {
 				|| nuevaDescripcion.isEmpty()) {
 			Log.info("Campo/s vacio/s al intentar modificar viaje por el"
 					+ " usuario [%s]", usuario.getLogin());
-			request.setAttribute("wrongRegistrarViaje", "Debe rellenar todos "
+			request.setAttribute("wrongDatatUpdate", "Debe rellenar todos "
 					+ "los campos (excepto latitud y longitud");
 			result = "FRACASO";
 		} else {
@@ -98,7 +98,7 @@ public class ModificarViajeAction implements Accion {
 				dateDestino = convertDate(nuevaFechaDestino, nuevaHoraDestino);
 				dateLimite = convertDate(nuevaFechaLimite, "23:59");
 			} catch (Exception e) {
-				request.setAttribute("wrongModificarViaje",
+				request.setAttribute("wrongDatatUpdate",
 						"Error: formato de fecha y/o hora incorrecto)");
 				Log.info("Error con el formato fecha registrar "
 						+ "viaje del usuario [%s]", usuario.getLogin());
@@ -109,7 +109,7 @@ public class ModificarViajeAction implements Accion {
 				intPlazasLibres = Integer.parseInt(nuevoPlazasLibres);
 				doubleCoste = Double.parseDouble(nuevoCoste);
 			} catch (Exception e) {
-				request.setAttribute("wrongModificarViaje",
+				request.setAttribute("wrongDatatUpdate",
 						"Error: formato de plazas y/o coste");
 				Log.info("Error con el formato plazas y/o coste al registrar"
 						+ "viaje del usuario [%s]", usuario.getLogin());
@@ -119,7 +119,7 @@ public class ModificarViajeAction implements Accion {
 					|| dateOrigen.before(new Date())
 					|| dateDestino.before(new Date())
 					|| dateLimite.before(new Date())) {
-				request.setAttribute("wrongModificarViaje",
+				request.setAttribute("wrongDatatUpdate",
 						"Error: la fecha de origen debe ser posterior a "
 								+ "la fecha limite, la fecha de destino "
 								+ "posterior a la fecha de origen y todas las "
@@ -130,7 +130,7 @@ public class ModificarViajeAction implements Accion {
 			} else if (intPlazasMaximo < intPlazasLibres
 					|| intPlazasMaximo <= 0 || intPlazasLibres <= 0
 					|| doubleCoste <= 0) {
-				request.setAttribute("wrongModificarViaje",
+				request.setAttribute("wrongDatatUpdate",
 						"Error: Numero de plazas y coste deben ser mayor que 0"
 								+ " además numero de plazas maximo debe ser "
 								+ "mayor que numero de plazas libres");
@@ -163,7 +163,7 @@ public class ModificarViajeAction implements Accion {
 						addressDestino.setWaypoint(new Waypoint(
 								doubleLatDestino, doubleLongDestino));
 					} catch (Exception e) {
-						request.setAttribute("wrongModificarViaje",
+						request.setAttribute("wrongDatatUpdate",
 								"Error: formato de latitud y/o logintud");
 						Log.info(
 								"Error con el formato langitud y/o latitud al "

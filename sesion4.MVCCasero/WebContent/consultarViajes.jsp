@@ -13,26 +13,23 @@
 	<%@ include file="barraDeMenu.jsp"%>
 	<jsp:useBean id="user" class="uo.sdi.model.User" scope="session" />
 	<div class="col-md-6 col-md-offset-3">
-	<div class="container">
-		<form>
-			<label for="origen">Origen:</label>
-			<input type="text" id="origen"name="origen" />
-			
-			<label for="destino">Destino:</label>
-			<input type="text" id="destino" name="destino" />
-			
-			<input type="submit" value="Buscar" />
-		</form>
-		<form>
+		<div class="container">
+			<form>
+				<label for="origen">Origen:</label> <input type="text" id="origen"
+					name="origen" /> <label for="destino">Destino:</label> <input
+					type="text" id="destino" name="destino" /> <input type="submit"
+					value="Buscar" />
+			</form>
+			<form>
 
-  			<input type="radio" name="orderBy" value="origen"> Origen<br>
-  			<input type="radio" name="orderBy" value="destino"> Destino<br>
-  			<input type="radio" name="orderBy" value="fecha"> Fecha
-  			
-  		</form>
+				<input type="radio" name="orderBy" value="origen"> Origen<br>
+				<input type="radio" name="orderBy" value="destino"> Destino<br>
+				<input type="radio" name="orderBy" value="fecha"> Fecha
 
-		
-	</div>
+			</form>
+
+
+		</div>
 		<h1>Próximos viajes</h1>
 		<c:forEach var="entry" items="${listaViajes}" varStatus="i">
 			<div class="panel panel-info">
@@ -85,7 +82,8 @@
 							</c:forEach>
 						</div>
 					</div>
-					<c:if test="${entry.availablePax<entry.maxPax && 
+					<c:if
+						test="${entry.availablePax<entry.maxPax && 
 					entry.promoterId!=user.id && 
 					!mapParticipantes.get(entry.id).contains(user)}">
 						<a id="solicitarPlaza" href="solicitarPlaza?viajeId=${entry.id}"

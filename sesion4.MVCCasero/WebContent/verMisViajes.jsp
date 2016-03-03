@@ -15,8 +15,8 @@
 	<div class="col-md-6 col-md-offset-3">
 		<h1>Viajes ofertados por mi.</h1>
 		<c:forEach var="entry" items="${listaViajesPromotor}" varStatus="i">
-			
-				
+
+
 			<div class="panel panel-info">
 				<div class="panel-heading">${entry.departure.city}->
 					${entry.destination.city} (${entry.status})</div>
@@ -55,30 +55,24 @@
 					</div>
 
 					<c:choose>
-					<c:when test="${entry.status.ordinal() == 0}">
-					<a id="modificarViaje" 
-					href="modificarViaje?viajeId=${entry.id}"
-						class="btn btn-success pull-center" role="button">
-						Modificar viaje</a>
-					<a id="verPasajerosInteresados" 
-					href="verPasajerosInteresados?viajeId=${entry.id}"
-						class="btn btn-info pull-left" role="button">
-						Aceptar pasajeros</a>
-					<a id="cancelarViaje" 
-					href="cancelarViaje?viajeId=${entry.id}"
-						class="btn btn-danger pull-right" role="button">
-						Cancelar viaje</a>
-					</c:when>
-					<c:otherwise>
-						<strong> Este viaje ya ha sido cancelado o
-						ya ha pasado.</strong>
-					</c:otherwise>
+						<c:when test="${entry.status.ordinal() == 0}">
+							<a id="modificarViaje" href="modificarViaje?viajeId=${entry.id}"
+								class="btn btn-success pull-center"> Modificar viaje</a>
+							<a id="verPasajerosInteresados"
+								href="verPasajerosInteresados?viajeId=${entry.id}"
+								class="btn btn-info pull-left"> Aceptar pasajeros</a>
+							<a id="cancelarViaje" href="cancelarViaje?viajeId=${entry.id}"
+								class="btn btn-danger pull-right"> Cancelar viaje</a>
+						</c:when>
+						<c:otherwise>
+							<strong> Este viaje ya ha sido cancelado o ya ha pasado.</strong>
+						</c:otherwise>
 					</c:choose>
-					
+
 
 				</div>
 			</div>
-			
+
 		</c:forEach>
 	</div>
 	<div class="col-md-6 col-md-offset-3">
@@ -123,8 +117,7 @@
 					</div>
 
 					<a id="comentarViaje" href="comentarViaje?viajeId=${entry.id}"
-						class="btn btn-info pull-right" role="button">
-						Comentar este viaje.</a>
+						class="btn btn-info pull-right"> Comentar este viaje.</a>
 
 				</div>
 			</div>
@@ -171,19 +164,16 @@
 					</div>
 
 					<c:choose>
-					<c:when test="${entry.status.ordinal() == 3}">
-					<a id="cancelarSolicitud" href="cancelarSolicitud?viajeId=
+						<c:when test="${entry.status.ordinal() == 3}">
+							<a id="cancelarSolicitud"
+								href="cancelarSolicitud?viajeId=
 					${entry.id}"
-						class="btn btn-danger pull-right" role="button">
-						Cancelar solicitud</a>
-					</c:when>
-					<c:otherwise>
-						<strong> Este viaje ha sido cancelado o
-						ya ha pasado.</strong>
-					</c:otherwise>
+								class="btn btn-danger pull-right"> Cancelar solicitud</a>
+						</c:when>
+						<c:otherwise>
+							<strong> Este viaje ha sido cancelado o ya ha pasado.</strong>
+						</c:otherwise>
 					</c:choose>
-
-
 				</div>
 			</div>
 		</c:forEach>
