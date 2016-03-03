@@ -5,9 +5,9 @@
 		</div>
 		<ul class="nav navbar-nav">
 			<li><a href="consultarViajes">Consultar viajes</a></li>
-			<li><a href="modificarUsuario.jsp">Modificar datos usuario</a></li>
+			<li><a href="modificarUsuario">Modificar datos usuario</a></li>
 			<li><a href="verMisViajes">Ver mis viajes</a></li>
-			<li><a href="registrarViaje.jsp">Registrar viaje</a></li>
+			<li><a href="registrarViaje">Registrar viaje</a></li>
 			<li>
 				<form class="form-horizontal" action="cerrarSesion" method="post">
 					<input type="submit" class="btn btn-danger pull-right"

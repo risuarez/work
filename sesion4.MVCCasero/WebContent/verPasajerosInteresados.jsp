@@ -14,9 +14,9 @@
 	<jsp:useBean id="user" class="uo.sdi.model.User" scope="session" />
 	<div class="col-md-4 col-md-offset-4">
 		<h1>Pasajeros interesados en tu viaje.</h1>
+			
 		<c:forEach var="entry" items="${listaUsuarios}" varStatus="i">
 								
-							
 		<h2>Perfil de usuario</h2>
 		<div class="panel panel-info">
 			<div class="panel-heading">

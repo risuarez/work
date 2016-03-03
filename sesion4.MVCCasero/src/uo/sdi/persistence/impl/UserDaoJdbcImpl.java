@@ -106,4 +106,13 @@ public class UserDaoJdbcImpl implements UserDao {
 			);
 	}
 
+	@Override
+	public User findUserAccepted(Long id, Long viajeId) {
+		return jdbcTemplate.queryForObject(
+				"USER_FIND_ACCEPTED",
+				new UserMapper(), 
+				id, viajeId
+			);
+	}
+
 }

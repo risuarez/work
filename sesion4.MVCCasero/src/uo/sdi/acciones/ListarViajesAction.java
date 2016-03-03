@@ -1,5 +1,7 @@
 package uo.sdi.acciones;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,25 +18,22 @@ public class ListarViajesAction implements Accion {
 			HttpServletResponse response) {
 		
 		List<Trip> viajes;
+		List<Trip> viajesProximos = new ArrayList<Trip>();
 		
-		String origen = request.getParameter("origen");
-		String destino = request.getParameter("destino");
 		
 		try {
-			if (assertNotNull(origen) || assertNotNull(destino)) {
-				viajes=PersistenceFactory.newTripDao().findAll();
-			}
-			else if (!assertNotNull(origen) || assertNotNull(destino)){
-				viajes=PersistenceFactory.newTripDao().findByOrigen(origen);
-			}
-			else if (assertNotNull(origen) || !assertNotNull(destino)){
-				viajes=PersistenceFactory.newTripDao().findByDestino(destino);
-			}
-			else {
-				viajes=PersistenceFactory.newTripDao().findByOrigenAndDestino(origen, destino);
-			}
 			
-			request.setAttribute("listaViajes", viajes);
+				viajes=PersistenceFactory.newTripDao().
+						findNextOpenAndFreeSeats();
+				
+				for (Trip t: viajes){
+					if (t.getClosingDate().after(new Date())){
+						viajesProximos.add(t);
+					}
+				}
+			
+			
+			request.setAttribute("listaViajes", viajesProximos);
 			Log.debug("Obtenida lista de viajes conteniendo [%d] viajes", viajes.size());
 		}
 		catch (Exception e) {
@@ -43,9 +42,7 @@ public class ListarViajesAction implements Accion {
 		return "EXITO";
 	}
 
-	private boolean assertNotNull(String str) {
-		return str == null || str.trim().length() == 0;
-	}
+	
 	
 	@Override
 	public String toString() {

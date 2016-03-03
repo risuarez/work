@@ -38,8 +38,16 @@ public class VerPasajerosInteresadosAction implements Accion {
 				
 				usuarios = PersistenceFactory.newUserDao().
 						findByTripInterestedIn(viajeId);
-				System.out.println(usuarios.size());
-				request.setAttribute("listaUsuarios", usuarios);
+				List<User> usuariosFiltrados = new ArrayList<User>();
+				
+				for (User usr : usuarios){
+					if(findApplicantsAccepted(usr.getId(), viajeId) == null){
+						usuariosFiltrados.add(usr);
+					}
+				}
+				
+				request.setAttribute("listaUsuarios", usuariosFiltrados);
+				System.out.println(usuariosFiltrados.size());
 				request.setAttribute("tripId", viajeId);
 				for (String message : logMessages)
 					Log.debug(message);
@@ -79,6 +87,14 @@ public class VerPasajerosInteresadosAction implements Accion {
 
 	
 	
+	private User findApplicantsAccepted(Long id, Long viajeId) {
+		
+		return PersistenceFactory.newUserDao().findUserAccepted(id, viajeId);
+		
+	}
+
+
+
 	@Override
 	public String toString() {
 		return getClass().getName();

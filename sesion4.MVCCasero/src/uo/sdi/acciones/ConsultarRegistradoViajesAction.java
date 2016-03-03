@@ -1,5 +1,7 @@
 package uo.sdi.acciones;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,6 +34,7 @@ public class ConsultarRegistradoViajesAction implements Accion
 	{
 
 		List<Trip> viajes;
+		List<Trip> viajesProximos = new ArrayList<Trip>();
 		Map<Long, List<User>> participantes = new HashMap<Long, List<User>>();
 		HttpSession session = request.getSession();
 		User usuario = ((User) session.getAttribute("user"));
@@ -41,26 +44,53 @@ public class ConsultarRegistradoViajesAction implements Accion
 
 		try
 		{
-			if (assertNotNull(origen) || assertNotNull(destino)) {
-				viajes=PersistenceFactory.newTripDao().findAll();
+			if (assertNotNull(origen) && assertNotNull(destino)) {
+				viajes=PersistenceFactory.newTripDao().
+						findNextOpenAndFreeSeats();
+				for (Trip t: viajes){
+					if (t.getClosingDate().after(new Date())){
+						viajesProximos.add(t);
+					}
+				}
 			}
-			else if (!assertNotNull(origen) || assertNotNull(destino)){
+			else if (!assertNotNull(origen) && assertNotNull(destino)){
 				viajes=PersistenceFactory.newTripDao().findByOrigen(origen);
+				for (Trip t: viajes){
+					if (t.getClosingDate().after(new Date())){
+						viajesProximos.add(t);
+					}
+				}
 			}
-			else if (assertNotNull(origen) || !assertNotNull(destino)){
+			else if (assertNotNull(origen) && !assertNotNull(destino)){
+				
 				viajes=PersistenceFactory.newTripDao().findByDestino(destino);
+				for (Trip t: viajes){
+					if (t.getClosingDate().after(new Date())){
+						viajesProximos.add(t);
+					}
+				}
 			}
 			else {
 				viajes=PersistenceFactory.newTripDao().findByOrigenAndDestino(origen, destino);
+				
+				for (Trip t: viajes){
+					if (t.getClosingDate().after(new Date())){
+						viajesProximos.add(t);
+					}
+				}
 			}
-			request.setAttribute("listaViajes", viajes);
-			Log.debug("Obtenida lista de viajes conteniendo [%d] viajes",
-					viajes.size());
-			for (Trip t : viajes)
+			
+			for (Trip t : viajesProximos)
 			{
 				participantes.put(t.getId(), PersistenceFactory.newUserDao()
 						.findByTrip(t.getId()));
 			}
+			
+			request.setAttribute("listaViajes", viajesProximos);
+			Log.debug("Obtenida lista de viajes conteniendo [%d] viajes",
+					viajes.size());
+			
+			
 			request.setAttribute("mapParticipantes", participantes);
 			Log.debug("Obtenida listas de usuarios");//
 
@@ -74,7 +104,7 @@ public class ConsultarRegistradoViajesAction implements Accion
 	}
 	
 	private boolean assertNotNull(String str) {
-		return str == null || str.trim().length() == 0;
+		return str == null || str.isEmpty();
 	}
 
 	@Override

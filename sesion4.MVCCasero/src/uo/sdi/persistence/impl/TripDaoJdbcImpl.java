@@ -157,6 +157,7 @@ public class TripDaoJdbcImpl implements TripDao {
 		return jdbcTemplate.queryForList("TRIP_FIND_ALL", new TripMapper());
 	}
 	
+	@Override
 	public List<Trip> findNextOpenAndFreeSeats() {
 		return jdbcTemplate.queryForList("TRIP_FIND_NEXT_OPEN_AND_FREE_SEATS", new TripMapper());
 	}

@@ -15,5 +15,6 @@ public interface TripDao extends GenericDao<Trip, Long> {
 	List<Trip> findByOrigen(String origen);
 	List<Trip> findByDestino(String destino);
 	List<Trip> findByOrigenAndDestino(String origen, String destino);
+	List<Trip> findNextOpenAndFreeSeats();
 
 }

@@ -13,4 +13,6 @@ public interface UserDao extends GenericDao<User, Long>{
 
 	List<User> findByTripInterestedIn(Long viajeId);
 
+	User findUserAccepted(Long id, Long viajeId);
+
 }

@@ -1,5 +1,6 @@
 package uo.sdi.acciones;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,9 +22,13 @@ public class ListarViajesImplicadoAction implements Accion {
 		List<Trip> viajesPromotor;
 		List<Trip> viajesParticipante;
 		List<Trip> viajesInteresado;
+		List<Trip> viajesInteresadoFiltrados;
 
 		HttpSession session = request.getSession();
 		User usuario = ((User) session.getAttribute("user"));
+		
+		String origen = request.getParameter("origen");
+		String destino = request.getParameter("destino");
 
 		try {
 			// Obteniendo viajes que ha ofertado el usuario
@@ -43,18 +48,58 @@ public class ListarViajesImplicadoAction implements Accion {
 					+ " conteniendo [%d] viajes", viajesPromotor.size());
 
 			// Obteniendo viajes en los que el usuario se ha interesado
+			
 			viajesInteresado = PersistenceFactory.newTripDao()
 					.findByUserInterested(usuario.getId());
+			
+			if (assertNotNull(origen) && assertNotNull(destino)) {
+				viajesInteresadoFiltrados = viajesInteresado;
+				
+			}
+			else if (!assertNotNull(origen) && assertNotNull(destino)){
+				viajesInteresadoFiltrados = new ArrayList<Trip>();
+				for (Trip t : viajesInteresado) {
+					if (t.getDeparture().getCity().equals(origen)){
+						viajesInteresadoFiltrados.add(t);
+					}
+				}
+				
+			}
+			else if (assertNotNull(origen) && !assertNotNull(destino)){
+				viajesInteresadoFiltrados = new ArrayList<Trip>();
+				for (Trip t : viajesInteresado) {
+					if (t.getDestination().getCity().equals(destino)){
+						viajesInteresadoFiltrados.add(t);
+					}
+				}
+			}
+			else {
+				viajesInteresadoFiltrados = new ArrayList<Trip>();
+				for (Trip t : viajesInteresado) {
+					if (t.getDeparture().getCity().equals(origen)
+							&& t.getDestination().getCity().equals(destino) ){
+						viajesInteresadoFiltrados.add(t);
+					}
+				}
+			}
+			
+			
+			
 
-			request.setAttribute("listaViajesInteresado", viajesInteresado);
+			request.setAttribute("listaViajesInteresado",
+					viajesInteresadoFiltrados);
 			Log.debug("Obtenida lista de viajes en los que el usuario "
 					+ "está interesado, conteniendo [%d] viajes",
-					viajesPromotor.size());
+					viajesInteresadoFiltrados.size());
 
 		} catch (Exception e) {
 			Log.error("Algo ha ocurrido obteniendo las listas de viajes");
 		}
 		return "EXITO";
+	}
+	
+	private boolean assertNotNull(String str) {
+		return str == null || str.isEmpty();
 	}
 
 	@Override
